@@ -167,7 +167,7 @@ static int test_level_write( struct file *filp, const char *user_space_buffer, u
 		return -ENOMEM;
 	}
 	// validate level value.
-	if(requested< 0 || requested > 100){
+	if(requested<= 0 || requested >= 100){
 		printk(KERN_INFO "Invalid battery level.\n");
 		return -ENOMEM;
 	}
