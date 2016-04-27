@@ -123,9 +123,24 @@ void* thresholdBtn(void *arg)
 static void sig_usr(int signo)
 {
 	if (signo == SIGUSR1)
+	{
+		if (signal(SIGUSR1, sig_usr) == SIG_ERR)
+		{
+			fprintf(stderr, "can't catch SIGUSR1\n");
+			return 1;
+		}
 		power_save_mode = 1;
+	}
+	
 	else if (signo == SIGUSR2)
+	{
+		if (signal(SIGUSR2, sig_usr) == SIG_ERR)
+		{
+			fprintf(stderr, "can't catch SIGUSR2\n");
+			return 1;
+		}
 		power_save_mode = 0;
-
+	}
+		
 	return;
 }
